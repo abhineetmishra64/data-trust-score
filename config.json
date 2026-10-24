@@ -1,0 +1,32 @@
+{
+  "weights": {
+    "DQ Score": 0.4,
+    "Glossary": 0.2,
+    "Ownership": 0.2,
+    "Metadata": 0.2
+  },
+  "bands": [
+    [
+      90,
+      "Decision-grade"
+    ],
+    [
+      75,
+      "Good Trust"
+    ],
+    [
+      60,
+      "Use with caution"
+    ],
+    [
+      0,
+      "At risk"
+    ]
+  ],
+  "timeliness": {
+    "VW_CLAIM_FRESHNESS": {
+      "table": "CLAIM",
+      "column": "UPDATED_TS"
+    }
+  }
+}

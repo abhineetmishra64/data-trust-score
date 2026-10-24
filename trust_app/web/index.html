@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Data Trust Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+      </span>
+      <div><h1>Data Trust Dashboard</h1><p id="formula">Trust Score</p></div>
+    </div>
+    <div class="top-right">
+      <span class="chip" id="stamp">Not refreshed yet</span>
+      <button class="icon" id="theme" title="Toggle dark mode" aria-label="Toggle dark mode">&#9788;</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="sources" class="sources">
+      <button class="source" id="fromPurview">
+        <span class="source-icon">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 010-8 5.5 5.5 0 0110.6 1.3A3.4 3.4 0 0117 18z"/><path d="M12 11v6m0 0l-2.5-2.5M12 17l2.5-2.5"/></svg>
+        </span>
+        <span class="source-text"><b>Trust Score from Purview</b><small>Read live from Microsoft Purview</small></span>
+      </button>
+      <button class="source" id="fromRaw">
+        <span class="source-icon alt">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M10 12c-1 0-1.5.5-1.5 1.5v.5c0 .8-.4 1-1 1 .6 0 1 .2 1 1v.5c0 1 .5 1.5 1.5 1.5M14 12c1 0 1.5.5 1.5 1.5v.5c0 .8.4 1 1 1-.6 0-1 .2-1 1v.5c0 1-.5 1.5-1.5 1.5"/></svg>
+        </span>
+        <span class="source-text"><b>Trust Score from raw JSON</b><small>Open an export saved earlier</small></span>
+      </button>
+    </section>
+
+    <div class="msg" id="msg" role="status">Choose where to read the Trust Score from.</div>
+
+    <div id="dash" hidden>
+      <div class="toolbar">
+        <label class="picker"><span>SELECT DOMAIN</span><select id="table"></select></label>
+        <span class="spacer"></span>
+        <button id="xlsx" class="ghost">&#11015; Excel report</button>
+        <button id="saveRaw" class="ghost" title="Keep a copy of the data in the raw_json folder">&#128190; Save raw JSON</button>
+      </div>
+
+      <section class="hero" id="hero"></section>
+
+      <section class="panel">
+        <h2>Score bands</h2>
+        <div class="bands" id="bands"></div>
+      </section>
+
+      <section class="split">
+        <div class="panel">
+          <h2>Data quality by dimension <small>table wise</small></h2>
+          <div class="scroll"><table id="grid"></table></div>
+          <p class="note">Timeliness is 100% when the freshness check passes (IS_FRESH = true), 0% when it fails, - when the table has no check.</p>
+        </div>
+        <div class="panel">
+          <h2>Chart data</h2>
+          <div class="scroll"><table id="chartdata"></table></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>DQ Dimension by CDE ColumnName</h2>
+        <div id="rules"></div>
+      </section>
+
+      <section class="panel">
+        <h2>CDE coverage <small id="count"></small></h2>
+        <div class="filters">
+          <input id="q" type="search" placeholder="Search column, CDE, rule...">
+          <select id="fdim"></select>
+          <select id="fyn"><option value="">Y and N</option><option value="N">Only N</option><option value="Y">Only Y</option></select>
+        </div>
+        <div class="scroll tall"><table id="cde"></table></div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="rawDialog">
+    <form method="dialog" class="dialog-head">
+      <h2>Trust Score from raw JSON</h2>
+      <button class="icon" aria-label="Close">&times;</button>
+    </form>
+    <p class="note">Files in the <b>raw_json</b> folder next to the app. Click one to open it.</p>
+    <div class="files" id="rawFiles"></div>
+    <div class="dialog-foot">
+      <button class="ghost" id="browse">Browse another file...</button>
+      <input id="file" type="file" accept=".json,application/json" hidden>
+    </div>
+  </dialog>
+
+  <script type="module" src="/static/main.js"></script>
+</body>
+</html>

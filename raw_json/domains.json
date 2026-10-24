@@ -1,0 +1,36 @@
+{
+  "value": [
+    {
+      "status": "Published",
+      "type": "DataDomain",
+      "id": "4f5436b1-84a6-43d8-b7bf-89490196eada",
+      "name": "Claims",
+      "systemData": {
+        "createdAt": "2026-10-05T18:39:42.9422819Z",
+        "createdBy": "967d2b1b-4e7f-4cb4-8016-5733e3d4d562",
+        "lastModifiedAt": "2026-10-07T06:17:33.2456764Z",
+        "lastModifiedBy": "967d2b1b-4e7f-4cb4-8016-5733e3d4d562"
+      },
+      "description": "<div>Claims Domain - Data Quality - Data Trust</div>",
+      "isRestricted": false,
+      "domains": [
+        {
+          "name": "exavalu",
+          "friendlyName": "exavalu",
+          "relatedCollections": [
+            {
+              "name": "sz3pqs",
+              "friendlyName": "Claims",
+              "parentCollection": {
+                "type": "CollectionReference",
+                "refName": "exavalu"
+              }
+            }
+          ]
+        }
+      ],
+      "isStagingDomain": false,
+      "managedAttributes": []
+    }
+  ]
+}
