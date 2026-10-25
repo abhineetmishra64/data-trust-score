@@ -41,6 +41,16 @@ The dashboard supports two sources:
 
 The app stores saved raw JSON copies in `raw_json`, and exported Excel reports in `output`.
 
+## Project structure
+
+`purview_trust_score.py` remains the command-line entry point and compatibility interface used by the dashboard and the domain-based script. Shared logic lives in `purview_engine/`:
+
+- `settings.py` loads configuration and defines shared paths and scoring settings.
+- `api.py` handles Purview authentication and paginated requests.
+- `data.py` converts raw responses to Trust Score rows and calculates scores.
+- `helpers.py` contains shared response-shaping helpers.
+- `report.py` builds the Excel workbook and dashboard.
+
 ## Configuration
 
 A `config.json` file next to the executable can override the built-in scoring settings such as weights and score bands.
